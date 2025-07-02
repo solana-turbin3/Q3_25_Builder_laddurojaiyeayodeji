@@ -27,6 +27,7 @@ const to = new PublicKey("5FaER8yXfEujMT7Q7N7BZ8hDdMgh15Vow7LgQpAeiTTy");
         const signature = await transfer(connection, keypair, fromWallet.address, toWallet.address, keypair, 400000)
 
         console.log(`Transfer transaction: ${signature}`)
+        
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
