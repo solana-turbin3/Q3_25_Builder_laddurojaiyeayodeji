@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 use anchor_spl::{
     token_interface::{
-        Mint, TokenAccount, TokenInterface, TransferChecked, transfer_checked
+        Mint, TokenAccount, TokenInterface, TransferChecked, transfer_checked, CloseAccount, close_account
     },
     associated_token::AssociatedToken
 };
