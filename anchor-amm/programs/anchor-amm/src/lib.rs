@@ -22,4 +22,12 @@ pub mod anchor_amm {
     pub fn deposit(ctx: Context<Deposit>, amount: u64, max_x: u64, max_y: u64) -> Result<()> {
         ctx.accounts.deposit(amount, max_x, max_y)
     }
+
+    pub fn swap(ctx: Context<Swap>, is_x: bool, amount: u64, min: u64) -> Result <()> {
+        ctx.accounts.swap(is_x, amount, min)
+    }
+
+    pub fn withdraw(ctx: Context<Withdraw>, amount: u64, min_x: u64, min_y: u64) -> Result<()> {
+        ctx.accounts.withdraw(amount, min_x, min_y)
+    }
 }
