@@ -22,7 +22,10 @@ pub mod nft_staking {
         ctx.accounts.initialize_user(&ctx.bumps)
     }
     pub fn stake(ctx: Context<Stake>) -> Result<()> {
-        ctx.accounts.stake(&ctx.bumps)
+        ctx.accounts.stake(&ctx.bumps)?;
+        ctx.accounts.claim_points()?;
+        ctx.accounts.get_available_points()?;
+        Ok(())
     }
     pub fn unstake(ctx: Context<Unstake>, points_to_claim: Option<u32>) -> Result<()> {
         ctx.accounts.unstake()?;

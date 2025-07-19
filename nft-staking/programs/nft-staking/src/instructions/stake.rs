@@ -124,4 +124,27 @@ impl<'info> Stake<'info> {
 
         Ok(())
     }
+
+    pub fn claim_points(&mut self) -> Result<()> {
+        let current_time = Clock::get()?.unix_timestamp;
+        let time_elapsed_days = ((current_time - self.stake_account.staked_at) / 86400) as u32;
+        let points_earned = time_elapsed_days / 2; // 1 point per 2 days
+        
+        if points_earned > 0 {
+            self.user_account.points += points_earned;
+            
+            // Update timestamp accounting for partial days
+            let days_accounted_for = points_earned * 2;
+            let remaining_seconds = (time_elapsed_days - days_accounted_for) * 86400;
+            self.stake_account.staked_at = current_time - remaining_seconds as i64;
+        }
+        
+        Ok(())
+    }
+
+    pub fn get_available_points(&self) -> Result<u32> {
+        let current_time = Clock::get()?.unix_timestamp;
+        let time_elapsed_days = ((current_time - self.stake_account.staked_at) / 86400) as u32;
+        Ok(time_elapsed_days / 2)
+    }
 }
